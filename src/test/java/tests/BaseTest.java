@@ -23,8 +23,6 @@ public class BaseTest {
     @Before
     public void setUp() throws MalformedURLException {
         DesiredCapabilities cap = new DesiredCapabilities();
-//        cap.setCapability("platformName", "Android");
-//        cap.setCapability(CapabilityType.PLATFORM_NAME, "Android");
         cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         cap.setCapability(MobileCapabilityType.UDID, "emulator-5554");
         cap.setCapability(MobileCapabilityType.DEVICE_NAME, "Android_SDK_built_for_x86");
@@ -35,13 +33,8 @@ public class BaseTest {
 
         URL url = new URL("http://0.0.0.0:5566/wd/hub");
 
-
-//        driver = new AppiumDriver<>(url, cap);
         driver = new AndroidDriver<>(url, cap);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
-
-
     }
 
     @After

@@ -7,8 +7,8 @@ import tests.BaseTest;
 
 public class BasePage {
 
-    private AppiumDriver driver;
-    private WebDriverWait wait;
+    private final AppiumDriver driver;
+    private final WebDriverWait wait;
 
     public BasePage() {
         this.driver = BaseTest.getDriver();

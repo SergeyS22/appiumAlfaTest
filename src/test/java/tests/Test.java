@@ -4,13 +4,20 @@ import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import pages.LoginPage;
 import pages.SuccessfulAuth;
-import testdata.Data;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 
-import static testdata.Data.*;
+import static testdata.Data.CORRECT_LOGIN;
+import static testdata.Data.CORRECT_PASSWORD;
+import static testdata.Data.ERROR_MESSAGE_TEXT;
+import static testdata.Data.INVALID_LOGIN;
+import static testdata.Data.INVALID_LOGIN_WITH_SPEC_SYMBOLS;
+import static testdata.Data.INVALID_PASSWORD;
+import static testdata.Data.INVALID_PASSWORD_WITH_SPEC_SYMBOLS;
+import static testdata.Data.maxLengthOfLogin;
+import static testdata.Data.maxLengthOfPassword;
 
 public class Test extends BaseTest {
 
@@ -24,7 +31,7 @@ public class Test extends BaseTest {
     }
 
     @org.junit.Test
-    public void successfulAuthTest() throws InterruptedException {
+    public void successfulAuthTest() {
         loginPage = new LoginPage();
         loginPage.clickOnLogin()
                  .typeOnLogin(CORRECT_LOGIN);
@@ -33,6 +40,17 @@ public class Test extends BaseTest {
                  .clickOnEnter();
         successfulAuth = new SuccessfulAuth();
         Assert.assertTrue(successfulAuth.isElementShow(successfulAuth.getTitleOfSuccessAuth()));
+    }
+
+    @org.junit.Test
+    public void changeLoginAndPasswordAuthTest() {
+        loginPage = new LoginPage();
+        loginPage.clickOnLogin()
+                 .typeOnLogin(CORRECT_PASSWORD);
+        loginPage.clickOnPassword()
+                 .typeOnPassword(CORRECT_LOGIN)
+                 .clickOnEnter();
+        Assert.assertTrue(loginPage.isElementShow(loginPage.getErrorMessage()));
     }
 
     @org.junit.Test
@@ -123,6 +141,8 @@ public class Test extends BaseTest {
         Assert.assertTrue(loginPage.isElementShow(loginPage.getErrorMessage()));
         Assert.assertEquals(loginPage.getValue(loginPage.getErrorMessage()), ERROR_MESSAGE_TEXT);
     }
+
+
 
 
 }
