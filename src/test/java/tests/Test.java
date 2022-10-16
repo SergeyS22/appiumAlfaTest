@@ -1,13 +1,8 @@
 package tests;
 
 import org.junit.Assert;
-import org.openqa.selenium.Keys;
 import pages.LoginPage;
 import pages.SuccessfulAuth;
-
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
 
 import static testdata.Data.CORRECT_LOGIN;
 import static testdata.Data.CORRECT_PASSWORD;
@@ -78,17 +73,13 @@ public class Test extends BaseTest {
         Assert.assertTrue(loginPage.isElementShow(loginPage.getErrorMessage()));
     }
 
-    //Вопросы к документации
+    //Вопросы по документации
     @org.junit.Test
     public void cutCheckLoginAndPasswordTest() {
 
-        StringSelection selection = new StringSelection(INVALID_LOGIN_WITH_SPEC_SYMBOLS);
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        clipboard.setContents(selection, selection);
-
         loginPage = new LoginPage();
         loginPage.clickOnLogin()
-                 .typeOnLogin(Keys.chord(Keys.CONTROL + "v"));
+                 .typeOnLogin(INVALID_LOGIN_WITH_SPEC_SYMBOLS);
         Assert.assertEquals(loginPage.getValue(loginPage.getLogin()), "Pass-");
         loginPage.clickOnPassword()
                  .typeOnPassword(INVALID_PASSWORD_WITH_SPEC_SYMBOLS);
@@ -97,7 +88,6 @@ public class Test extends BaseTest {
         //из требований не до конца ясно какое InvalidValue должно отображаться. В процессе Исследовательского тестирования приложения не
         // не найден текст сообщения
     }
-
 
     @org.junit.Test
     public void loginMaxLength() {
@@ -141,8 +131,6 @@ public class Test extends BaseTest {
         Assert.assertTrue(loginPage.isElementShow(loginPage.getErrorMessage()));
         Assert.assertEquals(loginPage.getValue(loginPage.getErrorMessage()), ERROR_MESSAGE_TEXT);
     }
-
-
 
 
 }

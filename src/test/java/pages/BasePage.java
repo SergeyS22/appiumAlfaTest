@@ -5,15 +5,14 @@ import io.appium.java_client.MobileElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import tests.BaseTest;
 
-public class BasePage {
+public abstract class BasePage {
 
     private final AppiumDriver driver;
     private final WebDriverWait wait;
 
     public BasePage() {
         this.driver = BaseTest.getDriver();
-        wait = new WebDriverWait(driver, 20);
-
+        wait = new WebDriverWait(driver, 5);
     }
 
     public AppiumDriver getDriver() {
