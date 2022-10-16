@@ -26,6 +26,7 @@ public class Test extends BaseTest {
     public void verifyTitleIsDisplayTest() {
         loginPage = new LoginPage();
         Assert.assertTrue(loginPage.isElementShow(loginPage.getTitle()));
+        Assert.assertTrue(loginPage.isElementEnabled(loginPage.getTitle()));
     }
 
     @org.junit.Test
