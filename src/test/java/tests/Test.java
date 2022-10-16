@@ -11,6 +11,7 @@ import static testdata.Data.INVALID_LOGIN;
 import static testdata.Data.INVALID_LOGIN_WITH_SPEC_SYMBOLS;
 import static testdata.Data.INVALID_PASSWORD;
 import static testdata.Data.INVALID_PASSWORD_WITH_SPEC_SYMBOLS;
+import static testdata.Data.MAX_STRING_LENGTH;
 import static testdata.Data.TITLE_OF_LOGIN_FIELD;
 import static testdata.Data.TITLE_OF_PASSWORD_FIELD;
 import static testdata.Data.maxLengthOfLogin;
@@ -110,15 +111,16 @@ public class Test extends BaseTest {
         loginPage = new LoginPage();
         loginPage.clickOnLogin()
                  .typeOnLogin(INVALID_LOGIN_WITH_SPEC_SYMBOLS);
-        Assert.assertEquals(loginPage.getValue(loginPage.getLogin()), "Pass-");
+        Assert.assertEquals("Pass-", loginPage.getValue(loginPage.getLogin()));
         loginPage.clickOnPassword()
                  .typeOnPassword(INVALID_PASSWORD_WITH_SPEC_SYMBOLS);
         // в требованиях не указаны допустимые и недопустимые символы. Предположительно те же условия как и для Логина (?)
-        Assert.assertEquals(loginPage.getValue(loginPage.getPassword()), "Pass-");
+        Assert.assertEquals("Pass-", loginPage.getValue(loginPage.getPassword()));
         // из требований не до конца ясно какое InvalidValue должно отображаться. В процессе Исследовательского тестирования приложения
         // не обнаружен текст сообщения
     }
 
+    // Найден дефект: поле логин позволяет ввести более 50 символов на экране авторизации в приложении Alfa-Test
     @org.junit.Test
     public void loginMaxLength() {
         loginPage = new LoginPage();
@@ -126,8 +128,10 @@ public class Test extends BaseTest {
                  .typeOnLogin(maxLengthOfLogin)
                  .clickOnEnter();
         Assert.assertTrue(loginPage.isElementShow(loginPage.getErrorMessage()));
+        Assert.assertEquals(MAX_STRING_LENGTH, loginPage.getValue(loginPage.getLogin()).length());
     }
 
+    // Найден дефект: поле логин позволяет ввести более 50 символов на экране авторизации в приложении Alfa-Test
     @org.junit.Test
     public void passwordMaxLength() {
         loginPage = new LoginPage();
@@ -135,6 +139,7 @@ public class Test extends BaseTest {
                  .typeOnPassword(maxLengthOfPassword)
                  .clickOnEnter();
         Assert.assertTrue(loginPage.isElementShow(loginPage.getErrorMessage()));
+        Assert.assertEquals(MAX_STRING_LENGTH, loginPage.getValue(loginPage.getPassword()).length());
     }
 
     @org.junit.Test
@@ -151,9 +156,9 @@ public class Test extends BaseTest {
         loginPage = new LoginPage();
         loginPage.clickOnPassword().typeOnPassword(CORRECT_PASSWORD);
         loginPage.clickOnShowPassword();
-        Assert.assertEquals(loginPage.getValue(loginPage.getPassword()), CORRECT_PASSWORD);
+        Assert.assertEquals(CORRECT_PASSWORD, loginPage.getValue(loginPage.getPassword()));
         loginPage.clickOnShowPassword();
-        Assert.assertEquals(loginPage.getValue(loginPage.getPassword()), CORRECT_PASSWORD);
+        Assert.assertEquals(CORRECT_PASSWORD, loginPage.getValue(loginPage.getPassword()));
     }
 
     @org.junit.Test
@@ -161,6 +166,6 @@ public class Test extends BaseTest {
         loginPage = new LoginPage();
         loginPage.clickOnEnter();
         Assert.assertTrue(loginPage.isElementShow(loginPage.getErrorMessage()));
-        Assert.assertEquals(loginPage.getValue(loginPage.getErrorMessage()), ERROR_MESSAGE_TEXT);
+        Assert.assertEquals(ERROR_MESSAGE_TEXT, loginPage.getValue(loginPage.getErrorMessage()));
     }
 }

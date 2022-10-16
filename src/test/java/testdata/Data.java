@@ -13,4 +13,7 @@ public class Data {
     public static final String INVALID_LOGIN_WITH_SPEC_SYMBOLS = "Login$%-234";
     public static final String INVALID_PASSWORD_WITH_SPEC_SYMBOLS = "Pass-12%^*";
     public static final String ERROR_MESSAGE_TEXT = "Введены неверные данные";
+
+    public static final int MAX_STRING_LENGTH = 50;
+
 }
