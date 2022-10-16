@@ -61,7 +61,6 @@ public class Test extends BaseTest {
         Assert.assertEquals(loginPage.getValue(loginPage.getPassword()), TITLE_OF_PASSWORD_FIELD);
     }
 
-
     @org.junit.Test
     public void changeLoginAndPasswordAuthTest() {
         loginPage = new LoginPage();
