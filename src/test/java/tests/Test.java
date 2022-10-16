@@ -11,6 +11,8 @@ import static testdata.Data.INVALID_LOGIN;
 import static testdata.Data.INVALID_LOGIN_WITH_SPEC_SYMBOLS;
 import static testdata.Data.INVALID_PASSWORD;
 import static testdata.Data.INVALID_PASSWORD_WITH_SPEC_SYMBOLS;
+import static testdata.Data.TITLE_OF_LOGIN_FIELD;
+import static testdata.Data.TITLE_OF_PASSWORD_FIELD;
 import static testdata.Data.maxLengthOfLogin;
 import static testdata.Data.maxLengthOfPassword;
 
@@ -26,6 +28,19 @@ public class Test extends BaseTest {
     }
 
     @org.junit.Test
+    public void verifyLoginScreensItemsIsDisplayTest() {
+        loginPage = new LoginPage();
+        Assert.assertTrue(loginPage.isElementShow(loginPage.getLogin()));
+        Assert.assertTrue(loginPage.isElementShow(loginPage.getPassword()));
+        Assert.assertTrue(loginPage.isElementShow(loginPage.getShowPassword()));
+        Assert.assertTrue(loginPage.isElementShow(loginPage.getEnterButton()));
+        Assert.assertTrue(loginPage.isElementEnabled(loginPage.getLogin()));
+        Assert.assertTrue(loginPage.isElementEnabled(loginPage.getPassword()));
+        Assert.assertTrue(loginPage.isElementEnabled(loginPage.getShowPassword()));
+        Assert.assertTrue(loginPage.isElementEnabled(loginPage.getEnterButton()));
+    }
+
+    @org.junit.Test
     public void successfulAuthTest() {
         loginPage = new LoginPage();
         loginPage.clickOnLogin()
@@ -36,6 +51,14 @@ public class Test extends BaseTest {
         successfulAuth = new SuccessfulAuth();
         Assert.assertTrue(successfulAuth.isElementShow(successfulAuth.getTitleOfSuccessAuth()));
     }
+
+    @org.junit.Test
+    public void labelsVerifyTest() {
+        loginPage = new LoginPage();
+        Assert.assertEquals(loginPage.getValue(loginPage.getLogin()), TITLE_OF_LOGIN_FIELD);
+        Assert.assertEquals(loginPage.getValue(loginPage.getPassword()), TITLE_OF_PASSWORD_FIELD);
+    }
+
 
     @org.junit.Test
     public void changeLoginAndPasswordAuthTest() {
@@ -73,7 +96,14 @@ public class Test extends BaseTest {
         Assert.assertTrue(loginPage.isElementShow(loginPage.getErrorMessage()));
     }
 
-    //Вопросы по документации
+    /* Вопросы по документации:
+        В документе сказано "Разрешенное множество символов: все." (1 требование) для поля Пароль. Далее по документации сказано, что "При
+        вводе неразрешенных символов необходимо отображать сообщение InvalidValue." (2 требование) -> требования противоречат друг другу
+        (?). Первое говорит о том, что разрешены все символы, а второе требование накладывает ограничения, что при вводе (неразрешённых)
+        символов необходимо отображать сообщение Invalid Value. Так же возник вопрос к Invalid Value, какой текст сообщения должен быть
+        или текст и есть "Invalid Value" (в процессе тестирования не смог добиться появления Invalid Value)?
+    */
+
     @org.junit.Test
     public void cutCheckLoginAndPasswordTest() {
 
@@ -83,10 +113,10 @@ public class Test extends BaseTest {
         Assert.assertEquals(loginPage.getValue(loginPage.getLogin()), "Pass-");
         loginPage.clickOnPassword()
                  .typeOnPassword(INVALID_PASSWORD_WITH_SPEC_SYMBOLS);
-        //в требованиях не указаны допустимые и недопустимые символы. Предположительно те же условия как и для Логина
+        // в требованиях не указаны допустимые и недопустимые символы. Предположительно те же условия как и для Логина (?)
         Assert.assertEquals(loginPage.getValue(loginPage.getPassword()), "Pass-");
-        //из требований не до конца ясно какое InvalidValue должно отображаться. В процессе Исследовательского тестирования приложения не
-        // не найден текст сообщения
+        // из требований не до конца ясно какое InvalidValue должно отображаться. В процессе Исследовательского тестирования приложения
+        // не обнаружен текст сообщения
     }
 
     @org.junit.Test
@@ -120,6 +150,8 @@ public class Test extends BaseTest {
     public void showPasswordTest() throws InterruptedException {
         loginPage = new LoginPage();
         loginPage.clickOnPassword().typeOnPassword(CORRECT_PASSWORD);
+        loginPage.clickOnShowPassword();
+        Assert.assertEquals(loginPage.getValue(loginPage.getPassword()), CORRECT_PASSWORD);
         loginPage.clickOnShowPassword();
         Assert.assertEquals(loginPage.getValue(loginPage.getPassword()), CORRECT_PASSWORD);
     }

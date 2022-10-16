@@ -31,5 +31,9 @@ public abstract class BasePage {
         return element.isDisplayed();
     }
 
+    public boolean isElementEnabled(MobileElement element) {
+        return element.isEnabled();
+    }
+
 
 }
