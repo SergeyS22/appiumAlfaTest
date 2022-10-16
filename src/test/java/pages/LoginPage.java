@@ -67,6 +67,4 @@ public class LoginPage extends BasePage {
         showPassword.click();
         return new LoginPage();
     }
-
-
 }

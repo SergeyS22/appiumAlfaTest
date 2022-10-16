@@ -163,6 +163,4 @@ public class Test extends BaseTest {
         Assert.assertTrue(loginPage.isElementShow(loginPage.getErrorMessage()));
         Assert.assertEquals(loginPage.getValue(loginPage.getErrorMessage()), ERROR_MESSAGE_TEXT);
     }
-
-
 }
