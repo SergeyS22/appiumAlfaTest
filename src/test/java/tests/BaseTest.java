@@ -24,7 +24,7 @@ public abstract class BaseTest {
     public void setUp() throws MalformedURLException {
         DesiredCapabilities cap = new DesiredCapabilities();
         cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-        cap.setCapability(MobileCapabilityType.UDID, "emulator-5554");
+        cap.setCapability(MobileCapabilityType.UDID, "emulator-5556");
         cap.setCapability(MobileCapabilityType.DEVICE_NAME, "Android_SDK_built_for_x86");
         cap.setCapability(MobileCapabilityType.NO_RESET, "true");
         cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 60);
