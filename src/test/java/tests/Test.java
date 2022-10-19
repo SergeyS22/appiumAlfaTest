@@ -111,7 +111,7 @@ public class Test extends BaseTest {
         loginPage = new LoginPage();
         loginPage.clickOnLogin()
                  .typeOnLogin(INVALID_LOGIN_WITH_SPEC_SYMBOLS);
-        Assert.assertEquals("Pass-", loginPage.getValue(loginPage.getLogin()));
+        Assert.assertEquals("Login-", loginPage.getValue(loginPage.getLogin()));
         loginPage.clickOnPassword()
                  .typeOnPassword(INVALID_PASSWORD_WITH_SPEC_SYMBOLS);
         // в требованиях не указаны допустимые и недопустимые символы. Предположительно те же условия как и для Логина (?)
