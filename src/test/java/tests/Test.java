@@ -14,8 +14,8 @@ import static testdata.Data.INVALID_PASSWORD_WITH_SPEC_SYMBOLS;
 import static testdata.Data.MAX_STRING_LENGTH;
 import static testdata.Data.TITLE_OF_LOGIN_FIELD;
 import static testdata.Data.TITLE_OF_PASSWORD_FIELD;
-import static testdata.Data.maxLengthOfLogin;
-import static testdata.Data.maxLengthOfPassword;
+import static testdata.Data.MAX_LENGTH_OF_LOGIN;
+import static testdata.Data.MAX_LENGTH_OF_PASSWORD;
 
 public class Test extends BaseTest {
 
@@ -125,7 +125,7 @@ public class Test extends BaseTest {
     public void loginMaxLength() {
         loginPage = new LoginPage();
         loginPage.clickOnLogin()
-                 .typeOnLogin(maxLengthOfLogin)
+                 .typeOnLogin(MAX_LENGTH_OF_LOGIN)
                  .clickOnEnter();
         Assert.assertTrue(loginPage.isElementShow(loginPage.getErrorMessage()));
         Assert.assertEquals(MAX_STRING_LENGTH, loginPage.getValue(loginPage.getLogin()).length());
@@ -136,7 +136,7 @@ public class Test extends BaseTest {
     public void passwordMaxLength() {
         loginPage = new LoginPage();
         loginPage.clickOnPassword()
-                 .typeOnPassword(maxLengthOfPassword)
+                 .typeOnPassword(MAX_LENGTH_OF_PASSWORD)
                  .clickOnEnter();
         Assert.assertTrue(loginPage.isElementShow(loginPage.getErrorMessage()));
         Assert.assertEquals(MAX_STRING_LENGTH, loginPage.getValue(loginPage.getPassword()).length());
