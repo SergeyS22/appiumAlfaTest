@@ -7,7 +7,7 @@ import tests.BaseTest;
 
 public abstract class BasePage {
 
-    private final AppiumDriver driver;
+    private final AppiumDriver<MobileElement> driver;
     private final WebDriverWait wait;
 
     public BasePage() {
